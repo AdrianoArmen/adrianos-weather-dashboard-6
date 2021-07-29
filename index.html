@@ -13,47 +13,55 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Weather Dashboard</title>
 </head>
+<!-- static header -->
+<h1 class="header-gradient">Weather Dashboard</h1>
 
 <body>
-    <h1 class="header-gradient">Weather Dashboard</h1>
+    <div class="container-fluid">
+        <div class="row">
 
-    <div class="container position-absolute top-0 start-0">
+            <div class="ccol-12 col-md-3 p-2">
 
-        <div class="row col-sm">
-
-            <div class="">
-                <h2>Search for a City: <span ></span></h2>
+                <h2>Search for a City: <span></span></h2>
                 <br />
+                
                 <!-- search result -->
                 <div></div>
                 <!-- inpunt text for search -->
                 <form id="search-form" class="mb-2">
-                    <input id="search-input" class="form-input w-100" type="text" placeholder="Search!" />
+                    <!-- form input -->
+                    <input id="search-input" class="w-100" type="text" placeholder="Type City" />
                     <!-- search button -->
+                    <br />
+                    <br />
                     <button class="btn btn-info btn-block">Search</button>
                 </form>
                 <!-- recent search cities -->
-                <div class="border" ></div>
+                <div id="stored-searches" class="border"></div>
             </div>
 
             <!-- search results from weather API -->
             <div class="col-12 col-md-9">
 
-                <h3 class="ml-5"></h3>
+                <h3 class="ml-5">Climate information of:</h3>
 
                 <!-- selected city forecast -->
-                <div class="row border">
-                    <div class="col-12"></div>
-                    <!-- selected city header -->
-                    <h2 id="selected-city"></h2>
-                    <!-- data from selected city -->
-                    <div id="selected-weather-container"></div>
+                <div id="weather-display" class="row border">
+                    <div class="col-12">
+                        <!-- selected city header -->
+                        <h2 id="selected-city"></h2>
+                        <!-- data from selected city -->
+                        <div id="selected-weather-container" class="list-group-item"></div>
+                    </div>
                 </div>
+
                 <!-- 5 day forecast -->
-                <div class="row border"></div>
-                <h2 class="col-12"></h2>
-                <!-- cards for 5 day forecast -->
-                <div class="d-flex"></div>
+                <div class="row" id="five-forecast">
+                    <!-- prediction title -->
+                    <h2 id="prediction" class="col-12"></h2>
+                    <!-- cards for 5 day forecast -->
+                    <div id="five-container" class="d-flex"></div>
+                </div>
             </div>
         </div>
     </div>

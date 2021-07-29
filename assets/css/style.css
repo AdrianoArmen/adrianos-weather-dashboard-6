@@ -3,5 +3,7 @@
 }
 
 .header-gradient {
+    color: white;
+    text-align: center;
     background: linear-gradient(to right, rgba(96, 159, 225, 1), rgba(28, 36, 146, 1))
 }
