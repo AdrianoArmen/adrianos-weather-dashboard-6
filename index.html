@@ -23,12 +23,12 @@
 
             <div class="">
                 <h2>Search for a City: <span ></span></h2>
-
+                <br />
                 <!-- search result -->
                 <div></div>
                 <!-- inpunt text for search -->
-                <form class="mb-2">
-                    <input class="form-input w-100" type="text" placeholder="Search!" />
+                <form id="search-form" class="mb-2">
+                    <input id="search-input" class="form-input w-100" type="text" placeholder="Search!" />
                     <!-- search button -->
                     <button class="btn btn-info btn-block">Search</button>
                 </form>
@@ -45,9 +45,9 @@
                 <div class="row border">
                     <div class="col-12"></div>
                     <!-- selected city header -->
-                    <h2 ></h2>
+                    <h2 id="selected-city"></h2>
                     <!-- data from selected city -->
-                    <div></div>
+                    <div id="selected-weather-container"></div>
                 </div>
                 <!-- 5 day forecast -->
                 <div class="row border"></div>
