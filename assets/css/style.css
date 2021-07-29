@@ -1,0 +1,7 @@
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+.header-gradient {
+    background: linear-gradient(to right, rgba(96, 159, 225, 1), rgba(28, 36, 146, 1))
+}
