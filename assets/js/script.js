@@ -24,7 +24,7 @@ let cityWeather = function (city) {
         })
         .then(function (data) {
             console.log(data);
-            displayW(data, town);
+            displayW(data, city);
         });
 };
 
@@ -73,4 +73,16 @@ let displayW = function (weather, selectedCity) {
     selectedWeatherCont.append(temperature);
     selectedWeatherCont.append(wind);
     selectedWeatherCont.append(humidity);
+};
+
+let textInput = function (event) {
+
+    console.log("submit");
+    event.preventDefault();
+
+    let city = searchInput.val().trim();
+    console.log(city);
+    if (city) {
+        cityWeather(city);
+    }
 };
