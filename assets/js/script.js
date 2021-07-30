@@ -28,3 +28,49 @@ let cityWeather = function (city) {
         });
 };
 
+// localstorage of cities search history
+let searchHistory = function () {
+    localStorage.setitem("cityStored", JSON.stringify(cityStored));
+};
+
+
+// weather display for selected city function
+let displayW = function (weather, selectedCity) {
+    wContainerEl.textContent = "";
+    selectedCity.textContent = selectedCity;
+
+    console.log(weather);
+    console.log(selectedCity);
+
+    // selected city current date
+    let currentDate = $("<span/>");
+    currentDate.textContent =
+        " (" + moment(weather.dt.value).format("MMM D, YYYY") + ")";
+    selectedCity.append(currentDate);
+
+    //selected city weather icon
+    let weatherIcon = $("<img/>");
+    weatherIcon.attr("src", "");
+
+    // selected city temperature
+    let temperature = $("<span/>");
+    temperature.text("Temperature: " + weather.main.temp + " ºF");
+    temperature.addClass("data-list");
+
+    //selected city wind speed
+    let wind = $("<span/>");
+    wind.text("Wind speed: " + weather.wind.speed + " MPH");
+    wind.addClass("data-list");
+
+    //selected city humidity
+    let humidity = $("<span/>");
+    humidity.text("Humidity: " + weather.main.humidity + " %");
+    humidity.addClass("data-list");
+
+
+    // UV Index <-
+
+    selectedWeatherCont.append(temperature);
+    selectedWeatherCont.append(wind);
+    selectedWeatherCont.append(humidity);
+};
