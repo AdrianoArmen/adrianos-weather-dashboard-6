@@ -201,6 +201,10 @@ let fiveDay = function (weather) {
 
 
 
+
+
+
+
 // input text trim functionality for api search
 let textInput = function (event) {
 

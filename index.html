@@ -22,22 +22,22 @@
 
             <div class="ccol-12 col-md-3 p-2">
 
-                <h2>Search for a City: <span></span></h2>
+                <h2>Search for a City: <span id="search-text"></span></h2>
                 <br />
                 
                 <!-- search result -->
-                <div></div>
+                <div id="search-content"></div>
                 <!-- inpunt text for search -->
                 <form id="search-form" class="mb-2">
                     <!-- form input -->
-                    <input id="search-input" class="w-100" type="text" placeholder="Type City" />
+                    <input id="search-input" class="form-input w-100" type="text" placeholder="Type City" />
                     <!-- search button -->
                     <br />
                     <br />
                     <button class="btn btn-info btn-block">Search</button>
                 </form>
                 <!-- recent search cities -->
-                <div id="stored-searches" class="border"></div>
+                <div id="stored-searches"></div>
             </div>
 
             <!-- search results from weather API -->
