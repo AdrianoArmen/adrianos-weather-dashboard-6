@@ -2,19 +2,22 @@
 
 // variables 
 let cityStored = [];
-let searchForm = $("#search-form");
-let searchInput = $("#search-input");
-let selectedWeatherCont = $("#selected-weather-container");
-let selectedCity = $("#selected-city")
-let predictionH = $("#prediction");
-let fiveContainer = $("#five-container");
-let storedSearches = $("#stored-searches");
+let searchForm = document.querySelector("#search-form");
+let searchInput = document.querySelector("#search-input");
+let selectedWeatherCont = document.querySelector("#selected-weather-container");
+let selectedCity = document.querySelector("#selected-city")
+let predictionH = document.querySelector("#prediction");
+let fiveContainer = document.querySelector("#five-container");
+let storedSearches = document.querySelector("#stored-searches");
+
+
 
 
 //  openweather fetch api using api key
 
 let cityWeather = function (city) {
     console.log("cityWeather");
+
     fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=840155a469a1270ff82a976016c38d58`
     )
@@ -24,9 +27,10 @@ let cityWeather = function (city) {
         })
         .then(function (data) {
             console.log(data);
-            displayW(data, city);
+            displayWeather(data, city);
         });
 };
+
 
 // localstorage of cities search history
 let searchHistory = function () {
@@ -36,53 +40,62 @@ let searchHistory = function () {
 
 // weather display for selected city function
 let displayW = function (weather, selectedCity) {
-    wContainerEl.textContent = "";
+    selectedWeatherCont.textContent = "";
     selectedCity.textContent = selectedCity;
 
     console.log(weather);
     console.log(selectedCity);
 
     // selected city current date
-    let currentDate = $("<span/>");
-    currentDate.textContent =
-        " (" + moment(weather.dt.value).format("MMM D, YYYY") + ")";
-    selectedCity.append(currentDate);
+    let currentDate = document.createElement("span");
+    currentDate.textContent = (
+        " (" + moment(weather.dt.value).format("MMM D, YYYY") + ")");
+    selectedCity.appendChild(currentDate);
 
     //selected city weather icon
-    let weatherIcon = $("<img/>");
-    weatherIcon.attr("src", "");
+    let weatherIcon = document.createElement("img");
+    weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
+    selectedCity.appendChild(weatherIcon)
 
     // selected city temperature
-    let temperature = $("<span/>");
-    temperature.text("Temperature: " + weather.main.temp + " ºF");
-    temperature.addClass("data-list");
+    let temperature = document.createElement("span");
+    temperature.textContent = "Temperature: " + weather.main.temp + " ºF";
+    temperature.classList = "list-group-item";
 
     //selected city wind speed
-    let wind = $("<span/>");
-    wind.text("Wind speed: " + weather.wind.speed + " MPH");
-    wind.addClass("data-list");
+    let wind = document.createElement("span");
+    wind.textContent = "Wind: " + weather.wind.speed + " MPH";
+    wind.classList = "list-group-item";
 
     //selected city humidity
-    let humidity = $("<span/>");
-    humidity.text("Humidity: " + weather.main.humidity + " %");
-    humidity.addClass("data-list");
+    let humidity = document.createElement("span");
+    humidity.textContent = "Humidity: " + weather.main.humidity + " %";
+    humidity.classList = "list-group-item";
 
 
     // UV Index <-
 
-    selectedWeatherCont.append(temperature);
-    selectedWeatherCont.append(wind);
-    selectedWeatherCont.append(humidity);
+    selectedWeatherCont.appendChild(temperature);
+    selectedWeatherCont.appendChild(wind);
+    selectedWeatherCont.appendChild(humidity);
 };
 
+// input text trim functionality for api search
 let textInput = function (event) {
 
-    console.log("submit");
+    console.log("click");
     event.preventDefault();
 
-    let city = searchInput.val().trim();
+    let city = searchInput.value.trim();
     console.log(city);
     if (city) {
         cityWeather(city);
-    }
-};
+        cityStored.unshift({ city });
+        searchInput.value = "";
+
+        // searchHistory();
+
+    };
+}
+
+searchForm.addEventListener("click", textInput);
