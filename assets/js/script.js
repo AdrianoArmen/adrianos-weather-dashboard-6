@@ -39,12 +39,12 @@ let searchHistory = function () {
 
 
 // weather display for selected city function
-let displayW = function (weather, selectedCity) {
+let displayWeather = function (weather, citySelection) {
     selectedWeatherCont.textContent = "";
-    selectedCity.textContent = selectedCity;
+    selectedCity.textContent = citySelection;
 
     console.log(weather);
-    console.log(selectedCity);
+    console.log(citySelection);
 
     // selected city current date
     let currentDate = document.createElement("span");
