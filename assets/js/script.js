@@ -73,12 +73,61 @@ let displayWeather = function (weather, citySelection) {
     humidity.classList = "list-group-item";
 
 
-    // UV Index <-
+
 
     selectedWeatherCont.appendChild(temperature);
     selectedWeatherCont.appendChild(wind);
     selectedWeatherCont.appendChild(humidity);
+
+    let latitud = weather.coord.lat;
+    let longitude = weather.coord.lon;
+   
+    uvIndex(latitud, longitude);
 };
+
+// selected city UV index
+let uvIndex = function (latitud, longitude) {
+    fetch(
+        `https://api.openweathermap.org/data/2.5/uvi?appid=a9e17a63f8c99240e7dabe900a8ce415&lat=${latitud}&lon=${longitude}`
+    )
+        
+        .then(function (response) {
+            
+            response.json();
+            return response.json();
+        })
+        .then(function (data) {
+
+            displayUv(data);
+            
+        });
+}
+
+let displayUv = function (element) {
+    console.log(element) 
+
+     let uvElement = document.createElement("div");
+     uvElement.textContent = "Ultra-Violet Index : ";
+     uvElement.classList = "list-group-item";
+
+     uvValue = document.createElement("span");
+     uvValue.textContent = base.value;
+
+     if (base.value <= 3) {
+        uvValue.classList = "green-uv";
+
+     } else if (base.value > 3 && base.value <= 7){
+        uvValue.classList = "yellow-uv"
+
+     }
+     else if (base.value > 8) {
+        uvValue.classList = "red-uv"
+     };
+     
+     uvElement.appendChild(uvValue);
+     selectedWeatherCont.appendChild(uvElement);
+ 
+ }; 
 
 // input text trim functionality for api search
 let textInput = function (event) {
