@@ -7,3 +7,24 @@
     text-align: center;
     background: linear-gradient(to right, rgba(96, 159, 225, 1), rgba(28, 36, 146, 1))
 }
+
+
+.green-uv {
+    background-color: #2cbe4c;
+    padding: 4px;
+    color: white;
+    
+  }
+  
+  .yellow-uv {
+    background-color: #e5e919;
+    padding: 4px;
+    color: black;
+  }
+  
+  .red-uv {
+    background-color: #e91f1f;
+    padding: 4px;
+    color: white;
+    
+  }
