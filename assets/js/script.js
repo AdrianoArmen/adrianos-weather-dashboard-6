@@ -22,11 +22,11 @@ let cityWeather = function (city) {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=840155a469a1270ff82a976016c38d58`
     )
         .then(function (response) {
-            console.log(response);
+            
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+            
             displayWeather(data, city);
         });
 };
@@ -63,21 +63,22 @@ let displayWeather = function (weather, citySelection) {
     temperature.classList = "list-group-item";
 
     //selected city wind speed
-    let wind = document.createElement("span");
-    wind.textContent = "Wind: " + weather.wind.speed + " MPH";
-    wind.classList = "list-group-item";
+    let windSpeed = document.createElement("span");
+    windSpeed.textContent = "Wind: " + weather.wind.speed + " MPH";
+    windSpeed.classList = "list-group-item";
 
     //selected city humidity
-    let humidity = document.createElement("span");
-    humidity.textContent = "Humidity: " + weather.main.humidity + " %";
-    humidity.classList = "list-group-item";
+    let humidityPer = document.createElement("span");
+    humidityPer.textContent = "Humidity: " + weather.main.humidity + " %";
+    humidityPer.classList = "list-group-item";
 
 
 
 
     selectedWeatherCont.appendChild(temperature);
-    selectedWeatherCont.appendChild(wind);
-    selectedWeatherCont.appendChild(humidity);
+    selectedWeatherCont.appendChild(windSpeed);
+    selectedWeatherCont.appendChild(humidityPer);
+
 
     let latitud = weather.coord.lat;
     let longitude = weather.coord.lon;
@@ -104,7 +105,7 @@ let uvIndex = function (latitud, longitude) {
 }
 
 let displayUv = function (base) {
-    console.log(base)
+    
 
     let uvBase = document.createElement("div");
     uvBase.textContent = "UV Index : ";
@@ -128,6 +129,77 @@ let displayUv = function (base) {
     selectedWeatherCont.appendChild(uvBase);
 
 };
+
+
+// five day forecast section
+
+
+let fiveDayForecast = function (city) {
+    fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=840155a469a1270ff82a976016c38d58`
+    )
+
+        .then(function (response) {
+
+            return response.json();
+        })
+        .then(function (data) {
+
+            fiveDay(data);
+
+        });
+}
+
+
+// display five day forecast cards
+let fiveDay = function (weather) {
+
+    fiveContainer.textContent = "";
+    predictionH.textContent = "Five-Day Forecast";
+
+    let next = weather.list;
+
+    for (var i = 5; i < next.length; i = i + 8) {
+
+        let displayCard = next[i];
+        let nextCard = document.createElement("div");
+
+        nextCard.classList = "card bg-success text-white m-2";
+        console.log(displayCard);
+
+        // five day firecast date
+        let nextDate = document.createElement("h5");
+        nextDate.textContent = moment.unix(displayCard.dt).format("MMM D, YYY");
+        nextDate.classList = "card-header text-center";
+        nextCard.appendChild(nextDate);
+
+        //five day forecast weather icon
+        let fiveDayIcon = document.createElement("img");
+        fiveDayIcon.classList = "card-body img-thumbnail m-1 p-1 text-center";
+        fiveDayIcon.setAttribute("src", `https://openweathermap.org/img/wn/${displayCard.weather[0].icon}@2x.png`);
+        nextCard.appendChild(fiveDayIcon);
+
+
+        //five day forecast temperature 
+        let fiveTemp = document.createElement("span");
+        fiveTemp.classList = "card-body border bg-success m-1 p-1 text-center";
+        fiveTemp.textContent = "Temp: " + displayCard.main.temp + " ºF";
+        nextCard.appendChild(fiveTemp);
+
+
+        // five day forecast humidity
+        let fiveHumid = document.createElement("span");
+        fiveHumid.classList = "card-body border bg-success m-1 p-1 text-center"
+        fiveHumid.textContent = "Hum: " + displayCard.main.humidity + " %";
+        nextCard.appendChild(fiveHumid);
+
+
+
+        fiveContainer.appendChild(nextCard);
+    }
+}
+
+
 
 // input text trim functionality for api search
 let textInput = function (event) {
