@@ -81,53 +81,53 @@ let displayWeather = function (weather, citySelection) {
 
     let latitud = weather.coord.lat;
     let longitude = weather.coord.lon;
-   
+
     uvIndex(latitud, longitude);
 };
 
 // selected city UV index
 let uvIndex = function (latitud, longitude) {
     fetch(
-        `https://api.openweathermap.org/data/2.5/uvi?appid=a9e17a63f8c99240e7dabe900a8ce415&lat=${latitud}&lon=${longitude}`
+        `https://api.openweathermap.org/data/2.5/uvi?appid=840155a469a1270ff82a976016c38d58&lat=${latitud}&lon=${longitude}`
     )
-        
+
         .then(function (response) {
-            
-            response.json();
+
+
             return response.json();
         })
         .then(function (data) {
 
             displayUv(data);
-            
+
         });
 }
 
-let displayUv = function (element) {
-    console.log(element) 
+let displayUv = function (base) {
+    console.log(base)
 
-     let uvElement = document.createElement("div");
-     uvElement.textContent = "Ultra-Violet Index : ";
-     uvElement.classList = "list-group-item";
+    let uvBase = document.createElement("div");
+    uvBase.textContent = "UV Index : ";
+    uvBase.classList = "list-group-item";
 
-     uvValue = document.createElement("span");
-     uvValue.textContent = base.value;
+    uvValue = document.createElement("span");
+    uvValue.textContent = base.value;
 
-     if (base.value <= 3) {
+    if (base.value <= 3) {
         uvValue.classList = "green-uv";
 
-     } else if (base.value > 3 && base.value <= 7){
+    } else if (base.value > 3 && base.value <= 7) {
         uvValue.classList = "yellow-uv"
 
-     }
-     else if (base.value > 8) {
+    }
+    else if (base.value > 8) {
         uvValue.classList = "red-uv"
-     };
-     
-     uvElement.appendChild(uvValue);
-     selectedWeatherCont.appendChild(uvElement);
- 
- }; 
+    };
+
+    uvBase.appendChild(uvValue);
+    selectedWeatherCont.appendChild(uvBase);
+
+};
 
 // input text trim functionality for api search
 let textInput = function (event) {
