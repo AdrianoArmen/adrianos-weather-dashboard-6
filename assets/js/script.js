@@ -31,9 +31,11 @@ let cityWeather = function (city) {
         .then(function (data) {
 
             displayWeather(data, city);
-        });
+        })
+        .then(function () {
+            fiveDayForecast(city);
+        })
 };
-
 
 // localstorage of cities search history
 let searchHistory = function () {
