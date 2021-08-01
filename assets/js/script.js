@@ -1,5 +1,7 @@
 // API Key: 840155a469a1270ff82a976016c38d58
 
+
+
 // variables 
 let cityStored = [];
 let searchForm = document.querySelector("#search-form");
@@ -16,17 +18,18 @@ let storedSearches = document.querySelector("#stored-searches");
 //  openweather fetch api using api key
 
 let cityWeather = function (city) {
-    console.log("cityWeather");
+
 
     fetch(
+
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=840155a469a1270ff82a976016c38d58`
     )
         .then(function (response) {
-            
+
             return response.json();
         })
         .then(function (data) {
-            
+
             displayWeather(data, city);
         });
 };
@@ -34,7 +37,7 @@ let cityWeather = function (city) {
 
 // localstorage of cities search history
 let searchHistory = function () {
-    localStorage.setitem("cityStored", JSON.stringify(cityStored));
+    localStorage.setItem("cityStored", JSON.stringify(cityStored));
 };
 
 
@@ -80,17 +83,19 @@ let displayWeather = function (weather, citySelection) {
     selectedWeatherCont.appendChild(humidityPer);
 
 
-    let latitud = weather.coord.lat;
+    let latitude = weather.coord.lat;
     let longitude = weather.coord.lon;
 
-    uvIndex(latitud, longitude);
+    uvIndex(latitude, longitude);
 };
 
+
 // selected city UV index
-let uvIndex = function (latitud, longitude) {
+let uvIndex = function (latitude, longitude) {
     fetch(
-        `https://api.openweathermap.org/data/2.5/uvi?appid=840155a469a1270ff82a976016c38d58&lat=${latitud}&lon=${longitude}`
+        `https://api.openweathermap.org/data/2.5/uvi?appid=840155a469a1270ff82a976016c38d58&lat=${latitude}&lon=${longitude}`
     )
+
 
         .then(function (response) {
 
@@ -104,8 +109,9 @@ let uvIndex = function (latitud, longitude) {
         });
 }
 
+
 let displayUv = function (base) {
-    
+
 
     let uvBase = document.createElement("div");
     uvBase.textContent = "UV Index : ";
@@ -157,15 +163,16 @@ let fiveDay = function (weather) {
     fiveContainer.textContent = "";
     predictionH.textContent = "Five-Day Forecast";
 
+    
     let next = weather.list;
-
-    for (var i = 5; i < next.length; i = i + 8) {
+    for(var i=5;i < next.length; i=i+8) {
+        let next = weather.list;
 
         let displayCard = next[i];
         let nextCard = document.createElement("div");
 
         nextCard.classList = "card bg-success text-white m-2";
-        console.log(displayCard);
+        
 
         // five day firecast date
         let nextDate = document.createElement("h5");
@@ -200,7 +207,28 @@ let fiveDay = function (weather) {
 }
 
 
+// search history function
 
+let lastSearch = function (lastSearch) {
+
+    searchElement = document.createElement("button");
+    searchElement.textContent = lastSearch;
+    searchElement.classList = "d-flex w-100 btn-white border p-2";
+    searchElement.setAttribute("data-city", lastSearch);
+    storedSearches.setAttribute("type", "submit");
+
+    storedSearches.prepend(searchElement);
+
+}
+
+let searchHandler = function (e) {
+    let city = e.target.getAttribute("data-city");
+    if (city) {
+
+        cityWeather(city);
+        fiveDayForecast(city);
+    }
+}
 
 
 
@@ -214,11 +242,14 @@ let textInput = function (event) {
     let city = searchInput.value.trim();
     console.log(city);
     if (city) {
+
         cityWeather(city);
+        fiveDay(city);
         cityStored.unshift({ city });
         searchInput.value = "";
 
-        // searchHistory();
+        searchHistory();
+        lastSearch(city);
 
     };
 }

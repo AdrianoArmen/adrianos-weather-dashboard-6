@@ -32,3 +32,8 @@
   .card-body{
     flex:auto
 }
+
+.data-list{
+  line-height: 0.7;
+  border: none;
+}
