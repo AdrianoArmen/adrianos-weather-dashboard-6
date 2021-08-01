@@ -116,7 +116,7 @@ let uvIndex = function (latitude, longitude) {
 
 
 let displayUv = function (base) {
-
+    console.log(base);
 
     let uvBase = document.createElement("div");
     uvBase.textContent = "UV Index : ";
@@ -124,7 +124,8 @@ let displayUv = function (base) {
 
     uvValue = document.createElement("span");
     uvValue.textContent = base.value;
-
+    console.log(base.value);
+    console.log( typeof base.value);
     if (base.value <= 3) {
         uvValue.classList = "green-uv";
 
@@ -168,16 +169,16 @@ let fiveDay = function (weather) {
     fiveContainer.textContent = "";
     predictionH.textContent = "Five-Day Forecast";
 
-    
+
     let next = weather.list;
-    for(var i=5;i < next.length; i=i+8) {
+    for (var i = 5; i < next.length; i = i + 8) {
         let next = weather.list;
 
         let displayCard = next[i];
         let nextCard = document.createElement("div");
 
-        nextCard.classList = "card bg-success text-white m-2";
-        
+        nextCard.classList = "card bg-secondary text-white m-2";
+
 
         // five day firecast date
         let nextDate = document.createElement("h5");
@@ -194,14 +195,14 @@ let fiveDay = function (weather) {
 
         //five day forecast temperature 
         let fiveTemp = document.createElement("span");
-        fiveTemp.classList = "card-body border bg-success m-1 p-1 text-center";
+        fiveTemp.classList = "card-body border bg-dark m-1 p-1 text-center";
         fiveTemp.textContent = "Temp: " + displayCard.main.temp + " ºF";
         nextCard.appendChild(fiveTemp);
 
 
         // five day forecast humidity
         let fiveHumid = document.createElement("span");
-        fiveHumid.classList = "card-body border bg-success m-1 p-1 text-center"
+        fiveHumid.classList = "card-body border bg-dark m-1 p-1 text-center"
         fiveHumid.textContent = "Hum: " + displayCard.main.humidity + " %";
         nextCard.appendChild(fiveHumid);
 
@@ -241,7 +242,7 @@ let searchHandler = function (e) {
 // input text trim functionality for api search
 let textInput = function (event) {
 
-    console.log("click");
+
     event.preventDefault();
 
     let city = searchInput.value.trim();
