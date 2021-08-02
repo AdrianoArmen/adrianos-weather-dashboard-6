@@ -42,6 +42,7 @@ let cityWeather = function (city) {
 
 // localstorage of cities search history
 let searchHistory = function () {
+    lastSearch(city).push(cityStored);
     localStorage.setItem("cityStored", JSON.stringify(cityStored));
 };
 
@@ -225,6 +226,8 @@ let lastSearch = function (lastSearch) {
 
     storedSearches.prepend(searchElement);
 
+    // searchElement.onclick = cityWeather(lastSearch);
+
 }
 
 let searchHandler = function (e) {
@@ -254,7 +257,7 @@ let textInput = function (event) {
         cityStored.unshift({ city });
         searchInput.value = "";
 
-        searchHistory();
+        searchHistory(city);
         lastSearch(city);
 
     };

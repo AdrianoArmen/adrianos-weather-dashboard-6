@@ -5,9 +5,9 @@ Homework 6 - Weather Dashboard
 
 ## HOMEWORK LINKS
 
-* GitHub Repository [GitHub repository link](https://github.com/AdrianoArmen/adrianos-day-planner-5) 
+* GitHub Repository [GitHub repository link](https://github.com/AdrianoArmen/adrianos-weather-dashboard-6) 
 
-* Website Deployed [Website Deploy link](https://adrianoarmen.github.io/adrianos-day-planner-5/) 
+* Website Deployed [Website Deploy link](https://adrianoarmen.github.io/adrianos-weather-dashboard-6/) 
 
 
 ## Mock-Up
@@ -27,7 +27,7 @@ This sample Weather Dashboard was designed to showcase my Server-Side APIs knowl
 
 The following animation demonstrates the actual application functionality:
 
-![A user searches for different citied on the weather dashboard and retrieves all the climate information and th 5 day forecast accordingly to the criteria](./assets/img/appfunctionality.gif)
+![A user searches for different cities on the weather dashboard and retrieves all the climate information and th 5 day forecast accordingly to the criteria](./assets/img/appfunctionality.gif)
 
 
 
